@@ -3,12 +3,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class SingleImageGridTile extends StatelessWidget {
-  const SingleImageGridTile(
-      {Key key, @required this.file, @required this.fileName})
-      : super(key: key);
+  const SingleImageGridTile({
+    Key key,
+    @required this.file,
+    @required this.fileName,
+    @required this.onClicked,
+  }) : super(key: key);
 
   final File file;
   final String fileName;
+  final VoidCallback onClicked;
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +26,18 @@ class SingleImageGridTile extends StatelessWidget {
         ),
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10.0),
-                  topRight: Radius.circular(10.0)),
-              child: Image.file(
-                file,
-                width: 130.0,
-                height: 120.0,
-                fit: BoxFit.fill,
+            GestureDetector(
+              onTap: onClicked,
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10.0),
+                    topRight: Radius.circular(10.0)),
+                child: Image.file(
+                  file,
+                  width: 130.0,
+                  height: 120.0,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             Expanded(

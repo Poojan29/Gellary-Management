@@ -26,17 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<List<FileSystemEntity>> getAllAvailableDirectory() async {
     externalStorageDir = await getExternalStorageDirectory();
-    final myDir = new Directory(externalStorageDir.path);
-    print('Init Folder Dir = $myDir');
-    for (FileSystemEntity d in myDir.listSync()) {
-      FileStat f1 = d.statSync();
-      print('init State = ${f1.toString()}');
-
-      directory = d;
+    final myExternalStorageDir = new Directory(externalStorageDir.path);
+    print('Init Folder Dir = $myExternalStorageDir');
+    for (Directory d in myExternalStorageDir.listSync()) {
+      allImages = d.listSync();
     }
-    allDirectory = myDir.listSync();
+    allDirectory = myExternalStorageDir.listSync();
     print('All Directory == $allDirectory');
-    print('Total Directory == ${allDirectory.length}');
 
     setState(() {});
 
@@ -123,15 +119,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Future<List<FileSystemEntity>> getAllDirectory() async {
       final myStorageDir = new Directory(externalStorageDir.path);
-      print('Folder Dir = $myStorageDir');
-      for (Directory d in myStorageDir.listSync()) {
-        print('All Files = $d');
-        directory = d;
-        allImages = directory.listSync();
+      Directory d;
+      for (d in myStorageDir.listSync()) {
+        allImages = d.listSync();
       }
       allDirectory = myStorageDir.listSync();
       print('All Directory == $allDirectory');
-      print('Total Directory == ${allDirectory.length}');
       return allDirectory;
     }
 
@@ -301,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       );
                       // Navigator.pop(context);
-                      setState(() {});
+                      //   setState(() {});
                     },
                     onCancelButtonPressed: () {
                       Navigator.pop(context);

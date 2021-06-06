@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/listTile/single_grid_tile.dart';
 import 'package:flutter_application_1/listTile/single_list_tile.dart';
+import 'package:flutter_application_1/screens/image_view.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as Img;
 import 'package:path/path.dart';
@@ -177,6 +178,18 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                                 return _image == null
                                     ? Text('No image Found')
                                     : SingleImageGridTile(
+                                        onClicked: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (builder) =>
+                                                  ImageViewScreen(
+                                                file: snapshot.data,
+                                                initialIndex: int,
+                                              ),
+                                            ),
+                                          );
+                                        },
                                         file: snapshot.data[int] as File,
                                         fileName:
                                             basename(snapshot.data[int].path),
@@ -193,6 +206,18 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                               return _image == null
                                   ? Center(child: Text('No image Found.'))
                                   : SingleImageListTile(
+                                      onClicked: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (builder) =>
+                                                ImageViewScreen(
+                                              file: snapshot.data,
+                                              initialIndex: int,
+                                            ),
+                                          ),
+                                        );
+                                      },
                                       //   date: date,
                                       file: snapshot.data[int] as File,
                                       fileName:
